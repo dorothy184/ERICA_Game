@@ -1,3 +1,30 @@
+import random
+
+def Skull_King():
+    username, tries, wins, members = login(load_members())
+    rule() #설명 할지 말지 선택 & 설명
+    while True:
+        print("===================================")
+        a = BetorNot() #배팅할지 말지 선택 & 설명
+        players_order = sunseo()#주사위 던져서 순서 결정
+        선 플레이어 카드내기
+        높은 레벨, 높은 계급만 내기
+        차례로 순서 돌아가기
+        낼 카드가 없으면 탈락
+        이긴 사람엑 +30점
+        예상 트릭수와 맞는지 판별
+        if  맞으면 트릭수*20
+        else abs(예측 트릭수와 맞는지 판별 ) 
+        게임 끝, 승률 저장
+        
+        #또 할래?
+        again = input("게임을 계속 하시겠습니까?(y/n)")
+        if again == y :
+            return Skull_King()
+        else:
+            print("게임을 종료합니다.")
+            break
+
 def rule():
     a = choice("Skull_King의 규칙을 아시나요?(y/n) ")
     if a != True:
@@ -43,3 +70,11 @@ def rule():
     else:
         print("그럼 게임을 시작합니다.")
         print()
+
+def trick(predict, real):
+    score = 0
+    if predict == real:
+        score += real * 20
+    else:
+        score -= abs(predict - real)*10
+    return score
