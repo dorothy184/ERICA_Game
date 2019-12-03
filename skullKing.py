@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+import random
 def choice(message):
     answer = input(message)
     while answer not in {"y","n"}:
@@ -7,9 +7,8 @@ def choice(message):
         return True
     else:
         return False
-=======
+    
 
-import random
 
 def sunseo():  # 순서정하기 함수
     rank = [0,0,0,0]
@@ -41,13 +40,13 @@ def Skull_King():
     rule() #설명 할지 말지 선택 & 설명
     while True:
         print("===================================")
-        a = BetorNot() #배팅할지 말지 선택 & 설명
+        predict = BetorNot() #배팅할지 말지 선택 & 설명
         players_order = sunseo()#주사위 던져서 순서 결정
         선 플레이어 카드내기
         높은 레벨, 높은 계급만 내기
         차례로 순서 돌아가기
         낼 카드가 없으면 탈락
-        이긴 사람엑 +30점
+        이긴 사람에게 +30점
         trick(predict, real)
         승률 저장
         #또 할래?
@@ -57,7 +56,7 @@ def Skull_King():
         else:
             print("게임을 종료합니다.")
             break
->>>>>>> b4c16eeafa6b39f8707added3cb40565245d7d70
+
 
 def rule():
     a = choice("Skull_King의 규칙을 아시나요?(y/n) ")
@@ -103,13 +102,8 @@ def rule():
             print()
     else:
         print("그럼 게임을 시작합니다.")
-<<<<<<< HEAD
-
-print()
 
 
-=======
-        print()
 
 def trick(predict, real):
     score = 0
@@ -118,4 +112,35 @@ def trick(predict, real):
     else:
         score -= abs(predict - real)*10
     return score
->>>>>>> b4c16eeafa6b39f8707added3cb40565245d7d70
+
+def load_members():
+    file = open("members.txt","r")
+    members = {}
+    for line in file:
+        name, passwd, tries, wins = line.strip('\n').split(',')
+        members[name] = (passwd,int(tries),float(wins))
+    file.close()
+    return members
+
+def login(members):
+    username = input("사용자명을 입력하십시오: (4 글자 이내) ")
+    while len(username) > 4:
+        username = input("사용자명을 입력하십시오: (4 글자 이내) ")
+    trypasswd = input("비밀번호를 입력하십시오: ")
+    if username in members.keys():
+        if trypasswd == members[username][0]:
+            print("플레이 횟수: ", members[username][1],"\n" "승리 횟수: ", members[username][2])# username의 게임시도 횟수와 이긴 횟수를 members에서 가져와 보여준다.
+
+            
+            if members[username][1] == 0:
+                print("당신의 승률은 0 % 입니다.")
+            else:
+                print("당신의 승률은 ", "{0:.1f}".format(members[username][2]/members[username][1]*100), "% 입니다.")
+            tries, wins = members[username][1],members[username][2]
+            return username, tries, wins, members
+        else:
+            return login(members)
+    else:
+        members[username] = (trypasswd, 0, 0)
+        return username, 0, 0, members
+
