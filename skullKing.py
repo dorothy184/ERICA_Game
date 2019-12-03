@@ -12,10 +12,10 @@ def choice(message):
 import random
 
 def sunseo():  # 순서정하기 함수
-    print("1부터 4 까지의 숫자 주사위로 플레이어 순서를 정하겠습니다.")
     rank = [0,0,0,0]
     jusawe = [1, 2, 3, 4]
     name = ["com1","com2","com3","player"]
+    ans = []
     random.shuffle(jusawe)
     for i in range(4):
         cnt = 0
@@ -24,20 +24,15 @@ def sunseo():  # 순서정하기 함수
                 cnt = cnt + 1
         rank[i] = cnt + 1
 
-    for k in range(4):
-        print(rank[k])
+    cnt = 0
+    while cnt < 4:
+        ans.append(name[rank.index(4-cnt)])
+        rank[rank.index(4-cnt)] = 0
+        cnt = cnt + 1
 
-    for i in range(4):
-        for j in range(4):
-            if rank[i] < rank[j]:
-               name[j] = name[4-rank[j]]
-               name[i] = name[4-rank[i]]
-            if rank[i] > rank[j]:
-               name[j] = name[4-rank[j]]
-               name[i] = name[4-rank[i]]
-                   
-    for k in name:
-        print(k)
+    return ans
+
+                
         
         
 
