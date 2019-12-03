@@ -1,3 +1,12 @@
+def choice(message):
+    answer = input(message)
+    while answer not in {"y","n"}:
+        answer = input(message)
+    if answer=="y":
+        return True
+    else:
+        return False
+
 def rule():
     a = choice("Skull_King의 규칙을 아시나요?(y/n) ")
     if a != True:
@@ -42,4 +51,7 @@ def rule():
             print()
     else:
         print("그럼 게임을 시작합니다.")
-        print()
+
+print()
+
+
