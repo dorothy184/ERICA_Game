@@ -32,7 +32,16 @@ def sunseo():  # 순서정하기 함수
     return ans
 
                 
-        
+def Deck():
+    #Escape < B+Y=R < G < Mermaid < Pirate < SkullKing
+    #1        2 3 4   5    6          7       8
+    deck = [(1,k) for k in range(5)]
+    deck.append((color,k) for color in range(2,6) for k in range(1,14))
+    deck.append((6,k) for k in range(2))
+    deck.append((7,k) for k in range(5))
+    deck.append((8,1))
+    random.shuffle(deck)
+    return deck
         
 
 def Skull_King():
