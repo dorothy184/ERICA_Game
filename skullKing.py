@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 def choice(message):
     answer = input(message)
     while answer not in {"y","n"}:
@@ -6,6 +7,62 @@ def choice(message):
         return True
     else:
         return False
+=======
+
+import random
+
+def sunseo():  # 순서정하기 함수
+    print("1부터 4 까지의 숫자 주사위로 플레이어 순서를 정하겠습니다.")
+    rank = [0,0,0,0]
+    jusawe = [1, 2, 3, 4]
+    name = ["com1","com2","com3","player"]
+    random.shuffle(jusawe)
+    for i in range(4):
+        cnt = 0
+        for j in range(4):
+            if jusawe[i] < jusawe[j]:
+                cnt = cnt + 1
+        rank[i] = cnt + 1
+
+    for k in range(4):
+        print(rank[k])
+
+    for i in range(4):
+        for j in range(4):
+            if rank[i] < rank[j]:
+               name[j] = name[4-rank[j]]
+               name[i] = name[4-rank[i]]
+            if rank[i] > rank[j]:
+               name[j] = name[4-rank[j]]
+               name[i] = name[4-rank[i]]
+                   
+    for k in name:
+        print(k)
+        
+        
+
+def Skull_King():
+    username, tries, wins, members = login(load_members())
+    rule() #설명 할지 말지 선택 & 설명
+    while True:
+        print("===================================")
+        a = BetorNot() #배팅할지 말지 선택 & 설명
+        players_order = sunseo()#주사위 던져서 순서 결정
+        선 플레이어 카드내기
+        높은 레벨, 높은 계급만 내기
+        차례로 순서 돌아가기
+        낼 카드가 없으면 탈락
+        이긴 사람엑 +30점
+        trick(predict, real)
+        승률 저장
+        #또 할래?
+        again = input("게임을 계속 하시겠습니까?(y/n)")
+        if again == y :
+            return Skull_King()
+        else:
+            print("게임을 종료합니다.")
+            break
+>>>>>>> b4c16eeafa6b39f8707added3cb40565245d7d70
 
 def rule():
     a = choice("Skull_King의 규칙을 아시나요?(y/n) ")
@@ -51,7 +108,19 @@ def rule():
             print()
     else:
         print("그럼 게임을 시작합니다.")
+<<<<<<< HEAD
 
 print()
 
 
+=======
+        print()
+
+def trick(predict, real):
+    score = 0
+    if predict == real:
+        score += real * 20
+    else:
+        score -= abs(predict - real)*10
+    return score
+>>>>>>> b4c16eeafa6b39f8707added3cb40565245d7d70
