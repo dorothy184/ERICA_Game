@@ -1,4 +1,35 @@
+
 import random
+
+def sunseo():  # 순서정하기 함수
+    print("1부터 4 까지의 숫자 주사위로 플레이어 순서를 정하겠습니다.")
+    rank = [0,0,0,0]
+    jusawe = [1, 2, 3, 4]
+    name = ["com1","com2","com3","player"]
+    random.shuffle(jusawe)
+    for i in range(4):
+        cnt = 0
+        for j in range(4):
+            if jusawe[i] < jusawe[j]:
+                cnt = cnt + 1
+        rank[i] = cnt + 1
+
+    for k in range(4):
+        print(rank[k])
+
+    for i in range(4):
+        for j in range(4):
+            if rank[i] < rank[j]:
+               name[j] = name[4-rank[j]]
+               name[i] = name[4-rank[i]]
+            if rank[i] > rank[j]:
+               name[j] = name[4-rank[j]]
+               name[i] = name[4-rank[i]]
+                   
+    for k in name:
+        print(k)
+        
+        
 
 def Skull_King():
     username, tries, wins, members = login(load_members())
@@ -12,11 +43,8 @@ def Skull_King():
         차례로 순서 돌아가기
         낼 카드가 없으면 탈락
         이긴 사람엑 +30점
-        예상 트릭수와 맞는지 판별
-        if  맞으면 트릭수*20
-        else abs(예측 트릭수와 맞는지 판별 ) 
-        게임 끝, 승률 저장
-        
+        trick(predict, real)
+        승률 저장
         #또 할래?
         again = input("게임을 계속 하시겠습니까?(y/n)")
         if again == y :
