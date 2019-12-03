@@ -47,6 +47,60 @@ def Deck():
     random.shuffle(deck)
     return deck        
 
+def cardlist(deck):
+    cardlist = []
+    for i in range(len(deck)):
+        if int(deck[i][0]) == 1:
+            cardlist.append('Escape_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 2:
+            cardlist.append('Blue_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 3:
+            cardlist.append('Yellow_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 4:
+            cardlist.append('Red_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 5:
+            cardlist.append('Grey_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 6:
+            cardlist.append('Mermaid_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 7:
+            cardlist.append('Pirate_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 8:
+            cardlist.append('SkullKing_'+str(deck[i][1]))
+    return cardlist
+
+def display_card(cardlist):
+    print("  | ",end="")
+    for i in range(len(cardlist)-1):
+        print(cardlist[i], " | ",end="")
+    print(cardlist[len(cardlist)], " |  ")
+
+def show_your_card(player, com1, com2, com3, players):
+    show = 1
+    for i in range(4):
+        if players[i] == "player":
+            if show == 1:
+                print("내가 가지고 있는 카드는\n")
+                display_card(first)
+                print()
+                return show
+            elif show == 2:
+                print("내가 가지고 있는 카드는\n")
+                display_card(second)
+                print()
+                return show
+            elif show == 3:
+                print("내가 가지고 있는 카드는\n")
+                display_card(third)
+                print()
+                return show
+            else:
+                print("내가 가지고 있는 카드는\n")
+                display_card(fourth)
+                print()
+                return show
+        else:
+            show += 1
+
 def Skull_King():
     username, tries, wins, members = login(load_members())
     rule() #설명 할지 말지 선택 & 설명
