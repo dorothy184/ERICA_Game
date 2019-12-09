@@ -100,7 +100,23 @@ def show_your_card(player, com1, com2, com3, players):
                 return show
         else:
             show += 1
-def lead_player_suggest():
+
+def spread_card(round):
+    deck=Deck()
+    first = []
+    second = []
+    third = []
+    fourth = []
+    for i in range(round):
+        first.append(deck[0])
+        deck = deck[1:]
+        second.append(deck[0])
+        deck = deck[1:]
+        third.append(deck[0])
+        deck = deck[1:]
+        fourth.append(deck[0])
+        deck = deck[1:]
+    return first, second, third, fourth
 
 
 def Skull_King():
