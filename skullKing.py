@@ -72,7 +72,7 @@ def display_card(cardlist):
     print("  | ",end="")
     for i in range(len(cardlist)-1):
         print(cardlist[i], " | ",end="")
-    print(cardlist[len(cardlist)], " |  ")
+    print(cardlist[len(cardlist)-1], " |  ")
 
 def show_your_card(player, com1, com2, com3, players):
     show = 1
@@ -100,6 +100,8 @@ def show_your_card(player, com1, com2, com3, players):
                 return show
         else:
             show += 1
+def lead_player_suggest():
+
 
 def Skull_King():
     username, tries, wins, members = login(load_members())
