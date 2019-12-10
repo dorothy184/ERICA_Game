@@ -32,16 +32,26 @@ def sunseo():  # 순서정하기 함수
     return ans
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
                 
+>>>>>>> 8a6f625ae145bd3ba13385aff6dce7ef6c00b79f
 def Deck():
-    #Escape < B+Y=R < G < Mermaid < Pirate < SkullKing
-    #1        2 3 4   5    6          7       8
-    deck = [(1,k) for k in range(5)]
-    deck.append((color,k) for color in range(2,6) for k in range(1,14))
-    deck.append((6,k) for k in range(2))
-    deck.append((7,k) for k in range(5))
-    deck.append((8,1))
+    #Escape < B=Y=R<G < Mermaid < Pirate<SkullKing
+    # 1       2 3 4 5    6        7       8
+    deck=[]
+    for k in range(5):
+        deck.append((1,k))
+    for color in range(2, 6):
+        for k in range(1, 14):
+            deck.append((color, k))
+    for k in range(2):
+        deck.append((6, k))
+    for k in range(5):
+        deck.append((7, k))
     random.shuffle(deck)
+<<<<<<< HEAD
+=======
     return deck
         
 =======
@@ -59,6 +69,7 @@ def Deck():
     for k in range(5):
         deck.append((7, k))
     random.shuffle(deck)
+>>>>>>> 8a6f625ae145bd3ba13385aff6dce7ef6c00b79f
     return deck        
 
 def cardlist(deck):
@@ -132,12 +143,26 @@ def spread_card(round):
         deck = deck[1:]
     return player, com1, com2, com3
 
+<<<<<<< HEAD
+def sun_player_present(players, first, second, third, fourth):
+    if(players[0]=="player"):
+        show_your_card(player, com1, com2, com3, players)
+        card = input("리드 수트로 제시할 카드를 입력하시오.")
+        lead_suit = cardremove(card)
+    else:
+        lead_suit = first[0]
+        first = first[1:]
+
+    return lead_suit
+
+=======
 def sun_player_present(first):
     lead_suit=first[0]
     first=first[1:]
     return lead_suit
 
 >>>>>>> 74cacd608d83b739129c792efef1480d10cd5d48
+>>>>>>> 8a6f625ae145bd3ba13385aff6dce7ef6c00b79f
 
 def Skull_King():
     username, tries, wins, members = login(load_members())
