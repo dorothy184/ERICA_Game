@@ -31,6 +31,11 @@ def sunseo():  # 순서정하기 함수
 
     return ans
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                
+>>>>>>> 8a6f625ae145bd3ba13385aff6dce7ef6c00b79f
 def Deck():
     #Escape < B=Y=R<G < Mermaid < Pirate<SkullKing
     # 1       2 3 4 5    6        7       8
@@ -45,6 +50,26 @@ def Deck():
     for k in range(5):
         deck.append((7, k))
     random.shuffle(deck)
+<<<<<<< HEAD
+=======
+    return deck
+        
+=======
+def Deck():
+    #Escape < B=Y=R<G < Mermaid < Pirate<SkullKing
+    # 1       2 3 4 5    6        7       8
+    deck=[]
+    for k in range(5):
+        deck.append((1,k))
+    for color in range(2, 6):
+        for k in range(1, 14):
+            deck.append((color, k))
+    for k in range(2):
+        deck.append((6, k))
+    for k in range(5):
+        deck.append((7, k))
+    random.shuffle(deck)
+>>>>>>> 8a6f625ae145bd3ba13385aff6dce7ef6c00b79f
     return deck        
 
 def cardlist(deck):
@@ -118,6 +143,7 @@ def spread_card(round):
         deck = deck[1:]
     return player, com1, com2, com3
 
+<<<<<<< HEAD
 def sun_player_present(players, first, second, third, fourth):
     if(players[0]=="player"):
         show_your_card(player, com1, com2, com3, players)
@@ -129,20 +155,35 @@ def sun_player_present(players, first, second, third, fourth):
 
     return lead_suit
 
+=======
+def sun_player_present(first):
+    lead_suit=first[0]
+    first=first[1:]
+    return lead_suit
+
+>>>>>>> 74cacd608d83b739129c792efef1480d10cd5d48
+>>>>>>> 8a6f625ae145bd3ba13385aff6dce7ef6c00b79f
 
 def Skull_King():
     username, tries, wins, members = login(load_members())
     rule() #설명 할지 말지 선택 & 설명
     while True:
-        print("===================================")
-        predict = BetorNot() #배팅할지 말지 선택 & 설명
-        players_order = sunseo()#주사위 던져서 순서 결정
-        선 플레이어 카드내기
-        높은 레벨, 높은 계급만 내기
-        차례로 순서 돌아가기
-        낼 카드가 없으면 탈락
-        이긴 사람에게 +30점
-        trick(predict, real)
+        round = 0
+        trick_point = 0
+        while(round <= 5)
+            round = round + 1
+            print("===================================")
+            predict = BetorNot() #배팅할지 말지 선택 & 설명
+            players_order = sunseo()#주사위 던져서 순서 결정
+            #선 플레이어 카드내기
+            spread_card(round)
+            
+            높은 레벨, 높은 계급만 내기
+            차례로 순서 돌아가기
+            낼 카드가 없으면 탈락
+            이긴 사람에게 +30점
+            trick_point += trick(predict, real)
+        
         승률 저장
         #또 할래?
         again = input("게임을 계속 하시겠습니까?(y/n)")
@@ -238,4 +279,14 @@ def login(members):
     else:
         members[username] = (trypasswd, 0, 0)
         return username, 0, 0, members
+<<<<<<< HEAD
 
+
+def BetorNot():
+    bet = int(input("얼마에 배팅하시겠습니까? "))
+    while bet>10 or bet<0 :
+        print("잘못된 숫자입니다. 다시 입력하십시오.")
+        bet = int(input("얼마에 배팅하시겠습니까? "))
+    return bet
+=======
+>>>>>>> 74cacd608d83b739129c792efef1480d10cd5d48
