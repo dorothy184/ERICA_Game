@@ -153,3 +153,10 @@ def login(members):
         members[username] = (trypasswd, 0, 0)
         return username, 0, 0, members
 
+
+def BetorNot():
+    bet = int(input("얼마에 배팅하시겠습니까? "))
+    while bet>10 or bet<0 :
+        print("잘못된 숫자입니다. 다시 입력하십시오.")
+        bet = int(input("얼마에 배팅하시겠습니까? "))
+    return bet
