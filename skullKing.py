@@ -185,13 +185,6 @@ def Skull_King():
             trick_point += trick(predict, real)
         
         save_winnings(a)
-        #또 할래?
-        again = input("게임을 계속 하시겠습니까?(y/n)")
-        if again == y :
-            return Skull_King()
-        else:
-            print("게임을 종료합니다.")
-            break
 
 def save_winnings(a):#a= boolean 
     tries+=1    
