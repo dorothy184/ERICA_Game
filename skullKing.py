@@ -31,23 +31,119 @@ def sunseo():  # 순서정하기 함수
 
     return ans
 
-                
-        
-        
+def Deck():
+    #Escape < B=Y=R<G < Mermaid < Pirate<SkullKing
+    # 1       2 3 4 5    6        7       8
+    deck=[]
+    for k in range(5):
+        deck.append((1,k))
+    for color in range(2, 6):
+        for k in range(1, 14):
+            deck.append((color, k))
+    for k in range(2):
+        deck.append((6, k))
+    for k in range(5):
+        deck.append((7, k))
+    random.shuffle(deck)
+    return deck        
+
+def cardlist(deck):
+    cardlist = []
+    for i in range(len(deck)):
+        if int(deck[i][0]) == 1:
+            cardlist.append('Escape_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 2:
+            cardlist.append('Blue_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 3:
+            cardlist.append('Yellow_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 4:
+            cardlist.append('Red_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 5:
+            cardlist.append('Grey_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 6:
+            cardlist.append('Mermaid_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 7:
+            cardlist.append('Pirate_'+str(deck[i][1]))
+        elif int(deck[i][0]) == 8:
+            cardlist.append('SkullKing_'+str(deck[i][1]))
+    return cardlist
+
+def display_card(cardlist):
+    print("  | ",end="")
+    for i in range(len(cardlist)-1):
+        print(cardlist[i], " | ",end="")
+    print(cardlist[len(cardlist)-1], " |  ")
+
+def show_your_card(player, com1, com2, com3, players):
+    show = 1
+    for i in range(4):
+        if players[i] == "player":
+            if show == 1:
+                print("내가 가지고 있는 카드는\n")
+                display_card(first)
+                print()
+                return show
+            elif show == 2:
+                print("내가 가지고 있는 카드는\n")
+                display_card(second)
+                print()
+                return show
+            elif show == 3:
+                print("내가 가지고 있는 카드는\n")
+                display_card(third)
+                print()
+                return show
+            else:
+                print("내가 가지고 있는 카드는\n")
+                display_card(fourth)
+                print()
+                return show
+        else:
+            show += 1
+
+def spread_card(round):
+    deck=Deck()
+    player = []
+    com1 = []
+    com2 = []
+    com3 = []
+    for i in range(round):
+        player.append(deck[0])
+        deck = deck[1:]
+        com1.append(deck[0])
+        deck = deck[1:]
+        com2.append(deck[0])
+        deck = deck[1:]
+        com3.append(deck[0])
+        deck = deck[1:]
+    return player, com1, com2, com3
+
+def sun_player_present(first):
+    lead_suit=first[0]
+    first=first[1:]
+    return lead_suit
+
 
 def Skull_King():
     username, tries, wins, members = login(load_members())
     rule() #설명 할지 말지 선택 & 설명
     while True:
-        print("===================================")
-        predict = BetorNot() #배팅할지 말지 선택 & 설명
-        players_order = sunseo()#주사위 던져서 순서 결정
-        선 플레이어 카드내기
-        높은 레벨, 높은 계급만 내기
-        차례로 순서 돌아가기
-        낼 카드가 없으면 탈락
-        이긴 사람에게 +30점
-        trick(predict, real)
+        round = 0
+        trick_point = 0
+        while(round <= 5)
+            round = round + 1
+            print("===================================")
+            predict = BetorNot() #배팅할지 말지 선택 & 설명
+            players_order = sunseo()#주사위 던져서 순서 결정
+            #선 플레이어 카드내기
+            spread_card(round)
+            
+            높은 레벨, 높은 계급만 내기
+            차례로 순서 돌아가기
+            낼 카드가 없으면 탈락
+            이긴 사람에게 +30점
+            trick_point += trick(predict, real)
+        
         승률 저장
         #또 할래?
         again = input("게임을 계속 하시겠습니까?(y/n)")
@@ -143,4 +239,3 @@ def login(members):
     else:
         members[username] = (trypasswd, 0, 0)
         return username, 0, 0, members
-
