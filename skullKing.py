@@ -118,9 +118,15 @@ def spread_card(round):
         deck = deck[1:]
     return player, com1, com2, com3
 
-def sun_player_present(first):
-    lead_suit=first[0]
-    first=first[1]
+def sun_player_present(players, first, second, third, fourth):
+    if(players[0]=="player"):
+        show_your_card(player, com1, com2, com3, players)
+        card = input("리드 수트로 제시할 카드를 입력하시오.")
+        lead_suit = cardremove(card)
+    else:
+        lead_suit = first[0]
+        first = first[1:]
+
     return lead_suit
 
 
