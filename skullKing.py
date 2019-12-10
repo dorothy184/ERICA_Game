@@ -7,8 +7,6 @@ def choice(message):
         return True
     else:
         return False
-    
-
 
 def sunseo():  # 순서정하기 함수
     rank = [0,0,0,0]
@@ -31,11 +29,6 @@ def sunseo():  # 순서정하기 함수
 
     return ans
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-                
->>>>>>> 8a6f625ae145bd3ba13385aff6dce7ef6c00b79f
 def Deck():
     #Escape < B=Y=R<G < Mermaid < Pirate<SkullKing
     # 1       2 3 4 5    6        7       8
@@ -50,11 +43,8 @@ def Deck():
     for k in range(5):
         deck.append((7, k))
     random.shuffle(deck)
-<<<<<<< HEAD
-=======
     return deck
         
-=======
 def Deck():
     #Escape < B=Y=R<G < Mermaid < Pirate<SkullKing
     # 1       2 3 4 5    6        7       8
@@ -69,7 +59,6 @@ def Deck():
     for k in range(5):
         deck.append((7, k))
     random.shuffle(deck)
->>>>>>> 8a6f625ae145bd3ba13385aff6dce7ef6c00b79f
     return deck        
 
 def cardlist(deck):
@@ -143,7 +132,6 @@ def spread_card(round):
         deck = deck[1:]
     return player, com1, com2, com3
 
-<<<<<<< HEAD
 def sun_player_present(players, first, second, third, fourth):
     if(players[0]=="player"):
         show_your_card(player, com1, com2, com3, players)
@@ -155,14 +143,10 @@ def sun_player_present(players, first, second, third, fourth):
 
     return lead_suit
 
-=======
 def sun_player_present(first):
     lead_suit=first[0]
     first=first[1:]
     return lead_suit
-
->>>>>>> 74cacd608d83b739129c792efef1480d10cd5d48
->>>>>>> 8a6f625ae145bd3ba13385aff6dce7ef6c00b79f
 
 def Skull_King():
     username, tries, wins, members = login(load_members())
@@ -193,7 +177,7 @@ def save_winnings(a):#a= boolean
     again = input("게임을 계속 하시겠습니까?(y/n)")
     if again == y :
         if a:
-            wins++
+           ++ wins
         Skull_King()
     else:
         print("게임을 종료합니다.")
@@ -280,7 +264,6 @@ def login(members):
     if username in members.keys():
         if trypasswd == members[username][0]:
             print("플레이 횟수: ", members[username][1],"\n" "승리 횟수: ", members[username][2])# username의 게임시도 횟수와 이긴 횟수를 members에서 가져와 보여준다.
-
             
             if members[username][1] == 0:
                 print("당신의 승률은 0 % 입니다.")
@@ -293,8 +276,6 @@ def login(members):
     else:
         members[username] = (trypasswd, 0, 0)
         return username, 0, 0, members
-<<<<<<< HEAD
-
 
 def BetorNot():
     bet = int(input("얼마에 배팅하시겠습니까? "))
@@ -302,5 +283,3 @@ def BetorNot():
         print("잘못된 숫자입니다. 다시 입력하십시오.")
         bet = int(input("얼마에 배팅하시겠습니까? "))
     return bet
-=======
->>>>>>> 74cayd608d83b739129c792efef1480d10cd5d48
