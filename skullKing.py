@@ -103,20 +103,25 @@ def show_your_card(player, com1, com2, com3, players):
 
 def spread_card(round):
     deck=Deck()
-    first = []
-    second = []
-    third = []
-    fourth = []
+    player = []
+    com1 = []
+    com2 = []
+    com3 = []
     for i in range(round):
-        first.append(deck[0])
+        player.append(deck[0])
         deck = deck[1:]
-        second.append(deck[0])
+        com1.append(deck[0])
         deck = deck[1:]
-        third.append(deck[0])
+        com2.append(deck[0])
         deck = deck[1:]
-        fourth.append(deck[0])
+        com3.append(deck[0])
         deck = deck[1:]
-    return first, second, third, fourth
+    return player, com1, com2, com3
+
+def sun_player_present(first):
+    lead_suit=first[0]
+    first=first[1]
+    return lead_suit
 
 
 def Skull_King():
