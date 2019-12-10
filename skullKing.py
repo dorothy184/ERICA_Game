@@ -1,4 +1,4 @@
-import random
+imporT random
 def choice(message):
     answer = input(message)
     while answer not in {"y","n"}:
@@ -159,7 +159,7 @@ def Skull_King():
             이긴 사람에게 +30점
             trick_point += trick(predict, real)
         
-        승률 저장
+        save_winnings(a)
         #또 할래?
         again = input("게임을 계속 하시겠습니까?(y/n)")
         if again == y :
@@ -168,6 +168,27 @@ def Skull_King():
             print("게임을 종료합니다.")
             break
 
+def save_winnings(a):#a= boolean 
+    tries+=1    
+    members[username] = members[username][0],tries,wins
+    store_members(members)
+    again = input("게임을 계속 하시겠습니까?(y/n)")
+    if again == y :
+        if a:
+            wins++
+        Skull_King()
+    else:
+        print("게임을 종료합니다.")
+        exit(0)
+
+def store_members(members):
+    file = open("members.txt","w")
+    name = members.keys()
+    for name in names:
+        password, tries, wins = members[name]
+        line = name +','+password+','+str(tries)+'+'+str(wins)+'\n'
+        file.write(line)
+    file.close()
 
 def rule():
     a = choice("Skull_King의 규칙을 아시나요?(y/n) ")
@@ -264,4 +285,4 @@ def BetorNot():
         bet = int(input("얼마에 배팅하시겠습니까? "))
     return bet
 =======
->>>>>>> 74cacd608d83b739129c792efef1480d10cd5d48
+>>>>>>> 74cayd608d83b739129c792efef1480d10cd5d48
