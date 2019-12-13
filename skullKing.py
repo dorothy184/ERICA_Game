@@ -1,4 +1,4 @@
-imporT random
+import random
 def choice(message):
     answer = input(message)
     while answer not in {"y","n"}:
@@ -141,12 +141,40 @@ def sun_player_present(players, first, second, third, fourth):
         lead_suit = first[0]
         first = first[1:]
 
-    return lead_suit
+    return lead_suit;
 
-def sun_player_present(first):
-    lead_suit=first[0]
-    first=first[1:]
-    return lead_suit
+def no_card(who, lead_suit):  # 낼 카드가 0개인지 확인
+    def big(a, b):
+        bool = False
+        if (int(a[0]) > int(b[0]) or int(a[0]) == int(b[0]) and int(a[1]) > int(b[1])):
+            bool = True
+        return bool
+
+    def num_big(a, b):
+        bool = False
+        if (int(a[0]) == int(b[0]) and int(a[1]) > int(b[1])):
+            bool = True
+        return bool
+
+    no = 0
+    for i in range(len(who)):
+        if int(lead_suit[0]) == 1 or int(lead_suit[0]) == 7 or int(lead_suit[0]) == 8:
+            if big(who[i], lead_suit):
+                no = no + 1
+        elif int(lead_suit[0]) == 2 or int(lead_suit[0]) == 3 or int(lead_suit[0]) == 4 or int(lead_suit[0]) == 5:
+            if int(who[i][0]) == 2 or int(who[i][0]) == 3 or int(who[i][0]) == 4 or int(who[i][0]) == 5:
+                if num_big(who[i], lead_suit): # lead_suit가 B, Y, R, G 레벨일 경우, 카드 숫자가 더 커야 함
+                    no = no + 1
+            else:
+                if big(who[i], lead_suit):
+                    no = no + 1
+        elif int(lead_suit[0]) == 6:
+            if int(who[i][0]) == 8: # lead_suit가 Mermaid 레벨일 경우, who가 Pirate이어도 카드를 못 냄
+                continue
+            else:
+                if big(who[i], lead_suit):
+                    no = no + 1
+    return no
 
 def Skull_King():
     username, tries, wins, members = login(load_members())
