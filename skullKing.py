@@ -44,23 +44,7 @@ def Deck():
         deck.append((7, k))
     random.shuffle(deck)
     return deck
-        
-def Deck():
-    #Escape < B=Y=R<G < Mermaid < Pirate<SkullKing
-    # 1       2 3 4 5    6        7       8
-    deck=[]
-    for k in range(5):
-        deck.append((1,k))
-    for color in range(2, 6):
-        for k in range(1, 14):
-            deck.append((color, k))
-    for k in range(2):
-        deck.append((6, k))
-    for k in range(5):
-        deck.append((7, k))
-    random.shuffle(deck)
-    return deck        
-
+              
 def cardlist(deck):
     cardlist = []
     for i in range(len(deck)):
