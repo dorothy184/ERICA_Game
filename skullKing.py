@@ -173,10 +173,10 @@ def Skull_King():
             players_order = sunseo()#주사위 던져서 순서 결정
             #선 플레이어 카드내기
             spread_card(round)
-            
-            높은 레벨, 높은 계급만 내기
-            차례로 순서 돌아가기
-            낼 카드가 없으면 탈락
+            for i in range(4): #차례로 순서 돌아가기
+                높은 레벨, 높은 계급만 내기
+            if nocard(player,lead_suit)==no:낼 카드가 없으면 탈락
+                pass    
             이긴 사람에게 +30점
             trick_point += trick(predict, real)
         
@@ -189,7 +189,7 @@ def save_winnings(a):#a= boolean
     again = input("게임을 계속 하시겠습니까?(y/n)")
     if again == y :
         if a:
-           ++ wins
+           ++wins
         Skull_King()
     else:
         print("게임을 종료합니다.")
@@ -248,8 +248,6 @@ def rule():
             print()
     else:
         print("그럼 게임을 시작합니다.")
-
-
 
 def trick(predict, real):
     score = 0
