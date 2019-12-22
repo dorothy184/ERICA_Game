@@ -33,8 +33,8 @@
 
 * 공동 기여 : 코드 오류 수정
 
-##Files
-###LICENSE	
+## Files
+### LICENSE	
 해당 코드에 대한 라이센스
 ### README.md
 게임에 관련된 간략한 소개 및 정리
