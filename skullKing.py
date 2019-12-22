@@ -78,22 +78,22 @@ def show_your_card(player, com1, com2, com3, players):
         if players[i] == "player":
             if show == 1:
                 print("내가 가지고 있는 카드는\n")
-                display_card(player)
+                display_card(cardlist(player))
                 print()
                 return show
             elif show == 2:
                 print("내가 가지고 있는 카드는\n")
-                display_card(player)
+                display_card(cardlist(player))
                 print()
                 return show
             elif show == 3:
                 print("내가 가지고 있는 카드는\n")
-                display_card(player)
+                display_card(cardlist(player))
                 print()
                 return show
             else:
                 print("내가 가지고 있는 카드는\n")
-                display_card(player)
+                display_card(cardlist(player))
                 print()
                 return show
         else:
@@ -198,7 +198,7 @@ def player_draw_card(player, winners, lead_suit):
                 break
         if (bool):
             break
-    card_remove(c, player)
+    cardremove(c, player)
     if (no_card(player, lead_suit) <= 0):
         winners.append("players")
         print()
