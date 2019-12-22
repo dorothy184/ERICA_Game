@@ -33,12 +33,13 @@
 
 * 공동 기여 : 코드 오류 수정
 
-## LICENSE	
+##Files
+###LICENSE	
 해당 코드에 대한 라이센스
-## README.md
+### README.md
 게임에 관련된 간략한 소개 및 정리
-## members.txt
+### members.txt
 로긴시 사용자의 데이터를 저장하기 위한 txt
-## skullKing.py
+### skullKing.py
 게임의 메인 함수
 skullKing.py	skullKing.py	1 hour ago
