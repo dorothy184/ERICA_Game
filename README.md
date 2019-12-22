@@ -1,4 +1,5 @@
 # ERICA_Game
+# SkullKing
 
 ## 기여자
 2019040973 소프트웨어학부 유은정 warmth424\
@@ -22,12 +23,12 @@
 
 ## 기여 분야
 * 2019040973 소프트웨어학부 유은정 warmth424
-  * load_members, sunseo, 보드 뼈대, trick, spread_card
+  * load_members, trick, spread_card, store_members
 * 2019082451 소프트웨어학부 손승아 Gongsoonyee
-  * README 작성, Skull_King, 로그인 함수, playmore, save_winnings, deck, betornot
+  * README 작성, Skull_King, login, playmore, save_winnings, deck, betornot
 * 2019038277 소프트웨어학부 김문주 dorothy184
   * rule, no_card, display_card, lead-suit, cardlist, higher_level, show_your_card, sun_player_present, choice, player_draw_card, big, num_big, spread_card
 * 2019007329 소프트웨어학부 이지현 JiHyeonL
-  * 순서 함수, cardremove, computer_bet 작성
+  * sunseo, cardremove, computer_bet 작성
 
 * 공동 기여 : 코드 오류 수정
