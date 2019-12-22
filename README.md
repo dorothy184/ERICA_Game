@@ -8,7 +8,8 @@
 
 ## 게임 준비물
 총 66장의 카드(일반카드 52장 + 특수카드 14장)
-
+점수 기록 노트
+총 4명의 플레이어
 
 ## 게임 방법
 1. 총 7라운드로 구성이 되며, 각 라운드마다 플레이어는 라운드 수에 해당되는 개수의 카드를 받습니다.
@@ -21,11 +22,11 @@
 
 ## 기여 분야
 * 2019040973 소프트웨어학부 유은정 warmth424
-  * load_members, sunseo, Skull_King, trick, spread_card
+  * load_members, sunseo, 보드 뼈대(Skull_King), trick, spread_card
 * 2019082451 소프트웨어학부 손승아 Gongsoonyee
-  * README 작성, 로그인 함수, playmore, save_winnings, deck, betornot
+  * README 작성, 보드 뼈대(Skull_King), 로그인 함수, playmore, save_winnings, deck, betornot
 * 2019038277 소프트웨어학부 김문주 dorothy184
-  * rule, no_card, display_card, lead-suit, cardlist, higher_level, show_your_card, sun_player_present,choice 함수
+  * rule, no_card, display_card, lead-suit, cardlist, higher_level, show_your_card, sun_player_present,choice
 * 2019007329 소프트웨어학부 이지현 JiHyeonL
   * cardremove함수 작성, computer_bet 함수 작성
 
