@@ -261,7 +261,11 @@ def save_winnings(a):  # a= boolean
     again = input("게임을 계속 하시겠습니까?(y/n)")
     if again == y:
         if a:
+<<<<<<< HEAD
             ++wins
+=======
+            wins=wins+1
+>>>>>>> 46e5099ec9b0647f73730dc24cc4bcfec018cf8b
         Skull_King()
     else:
         print("게임을 종료합니다.")
@@ -440,6 +444,30 @@ def cardremove(cardname, player):
 
     return cardname
 
+<<<<<<< HEAD
 
+=======
+def change(cardname):
+    partitioncard = []
+    partitioncard = cardname.split('_')
+    if partitioncard[0] == "Escape":
+        card = (1, int(partitioncard[1]))
+    elif partitioncard[0] == "Blue":
+        card = (2, int(partitioncard[1]))
+    elif partitioncard[0] == "Yellow":
+        card = (3, int(partitioncard[1]))
+    elif partitioncard[0] == "Red":
+        card = (4, int(partitioncard[1]))
+    elif partitioncard[0] == "Grey":
+        card = (5, int(partitioncard[1]))
+    elif partitioncard[0] == "Mermaid":
+        card = (6, int(partitioncard[1]))
+    elif partitioncard[0] == "Pirate":
+        card = (7, int(partitioncard[1]))
+    elif partitioncard[0] == "SkullKing":
+        card = (8, int(partitioncard[1]))
+
+    return card
+>>>>>>> 46e5099ec9b0647f73730dc24cc4bcfec018cf8b
 
 
