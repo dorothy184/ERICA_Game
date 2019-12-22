@@ -29,6 +29,6 @@
 * 2019038277 소프트웨어학부 김문주 dorothy184
   * rule, no_card, display_card, lead-suit, cardlist, higher_level, show_your_card, sun_player_present, choice, player_draw_card, big, num_big, spread_card
 * 2019007329 소프트웨어학부 이지현 JiHyeonL
-  * sunseo, cardremove, computer_bet 작성
+  * sunseo, cardremove, computer_bet
 
 * 공동 기여 : 코드 오류 수정
