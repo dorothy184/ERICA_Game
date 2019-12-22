@@ -444,9 +444,7 @@ def cardremove(cardname, player):
 
     return cardname
 
-<<<<<<< HEAD
 
-=======
 def change(cardname):
     partitioncard = []
     partitioncard = cardname.split('_')
@@ -468,6 +466,26 @@ def change(cardname):
         card = (8, int(partitioncard[1]))
 
     return card
->>>>>>> 46e5099ec9b0647f73730dc24cc4bcfec018cf8b
 
 
+def cardchange(card_munza):
+    partitioncard = []
+    partitioncard = card_munza.split('_')
+    if partitioncard[0] == "Escape":
+        tuplecard = ((1, int(partitioncard[1])))
+    elif partitioncard[0] == "Blue":
+        tuplecard=((2, int(partitioncard[1])))
+    elif partitioncard[0] == "Yellow":
+        tuplecard = ((3, int(partitioncard[1])))
+    elif partitioncard[0] == "Red":
+        tuplecard = ((4, int(partitioncard[1])))
+    elif partitioncard[0] == "Grey":
+        tuplecard = ((5, int(partitioncard[1])))
+    elif partitioncard[0] == "Mermaid":
+        tuplecard = ((6, int(partitioncard[1])))
+    elif partitioncard[0] == "Pirate":
+        tuplecard = ((7, int(partitioncard[1])))
+    elif partitioncard[0] == "SkullKing":
+        tuplecard = ((8, int(partitioncard[1])))
+
+    return tuplecard
