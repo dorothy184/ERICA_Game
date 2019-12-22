@@ -261,7 +261,7 @@ def save_winnings(a):  # a= boolean
     again = input("게임을 계속 하시겠습니까?(y/n)")
     if again == y:
         if a:
-            ++wins
+            wins=wins+1
         Skull_King()
     else:
         print("게임을 종료합니다.")
