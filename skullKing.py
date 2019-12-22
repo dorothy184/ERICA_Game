@@ -213,7 +213,7 @@ def Skull_King():
     while True:
         round = 0
         trick_point = 0
-        while(round <= 5)
+        while(round <= 5):
             round = round + 1
             print("===================================")
             predict = BetorNot() #배팅할지 말지 선택 & 설명
@@ -340,3 +340,72 @@ def BetorNot():
         print("잘못된 숫자입니다. 다시 입력하십시오.")
         bet = int(input("얼마에 배팅하시겠습니까? "))
     return bet
+
+def computer_bet(computer,betcardlist,beforecard):
+    #computer는 현재 제시할 컴퓨터 이름ex) computer2, betcardlist는 그 컴퓨터의 카드가 있는 리스트 ex)com2
+    #beforecard는 전 플레이어나 컴퓨터가 낸 카드
+    color_partition = beforecard.split('_')
+    newbeforecard = []
+    canbetcard = []
+    if color_partition[0] == 'Escape':
+        newbeforecard.append((1,int(color_partition[1])))
+    elif color_partition[0] == 'Blue':
+        newbeforecard.append((2,int(color_partition[1])))
+    elif color_partition[0] == 'Yellow':
+        newbeforecard.append((3,int(color_partition[1])))
+    elif color_partition[0] == 'Blue':
+        newbeforecard.append((4,int(color_partition[1])))
+    elif color_partition == 'Red':
+        newbeforecard.append((5,int(color_partition[1])))
+    elif color_partition == 'Grey':
+        newbeforecard.append((6,int(color_partition[1])))
+    elif color_partition == 'Mermaid':
+        newbeforecard.append((7,int(color_partition[1])))
+    elif color_partition == 'Pirate':
+        newbeforecard.append((8,int(color_partition[1])))
+    elif color_partition == 'SkullKing':
+        newbeforecard.append((9,int(color_partition[1])))
+    for i in betcardlist:
+        if (newbeforecard[0] != 7):
+            if (i[0] == newbeforecard[0]):
+                if (i[1] > newbeforecard[1]):
+                    canbetcard.append(i)
+            elif (i[0] > newbeforecard[0]):
+                canbetcard.append(i)
+        else:
+            if (i[0] == 9):
+                continue
+            elif (i[0] == newbeforecard[0]):
+                if (i[1] > newbeforecard[1]):
+                    canbetcard.append(i)
+            elif (i[0] > newbeforecard[0]):
+                canbetcard.append(i)
+    random.shuffle(canbetcard)
+    computercard = canbetcard[0]
+    print(computer,"가",computercard ,"카드를 제시하였습니다.");
+    betcardlist.remove(computer)
+
+
+def cardremove(cardname, player):
+    partitioncard = []
+    partitioncard = cardname.split('_')
+    if partitioncard[0] == 'Escape':
+        player.remove((1, int(partitioncard[1])))
+    elif partitioncard[0] == 'Blue':
+        player.remove((2, int(partitioncard[1])))
+    elif partitioncard[0] == 'Yellow':
+        player.remove((3, int(partitioncard[1])))
+    elif partitioncard[0] == 'Blue':
+        player.remove((4, int(partitioncard[1])))
+    elif partitioncard[0] == 'Red':
+        player.remove((5, int(partitioncard[1])))
+    elif partitioncard[0] == 'Grey':
+        player.remove((6, int(partitioncard[1])))
+    elif partitioncard[0] == 'Mermaid':
+        player.remove((7, int(partitioncard[1])))
+    elif partitioncard[0] == 'Pirate':
+        player.remove((8, int(partitioncard[1])))
+    elif partitioncard[0] == 'SkullKing':
+        player.remove((9, int(partitioncard[1])))
+
+    return player
