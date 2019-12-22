@@ -67,10 +67,10 @@ def cardlist(deck):
     return cardlist
 
 def display_card(cardlist):
-    print("  | ",end="")
+    print("|  ",end="")
     for i in range(len(cardlist)-1):
-        print(cardlist[i], " | ",end="")
-    print(cardlist[len(cardlist)-1], " |  ")
+        print(cardlist[i], " |  ",end="")
+    print(cardlist[len(cardlist)-1], " |")
 
 def show_your_card(player, com1, com2, com3, players):
     show = 1
@@ -78,22 +78,22 @@ def show_your_card(player, com1, com2, com3, players):
         if players[i] == "player":
             if show == 1:
                 print("내가 가지고 있는 카드는\n")
-                display_card(first)
+                display_card(player)
                 print()
                 return show
             elif show == 2:
                 print("내가 가지고 있는 카드는\n")
-                display_card(second)
+                display_card(player)
                 print()
                 return show
             elif show == 3:
                 print("내가 가지고 있는 카드는\n")
-                display_card(third)
+                display_card(player)
                 print()
                 return show
             else:
                 print("내가 가지고 있는 카드는\n")
-                display_card(fourth)
+                display_card(player)
                 print()
                 return show
         else:
@@ -116,30 +116,35 @@ def spread_card(round):
         deck = deck[1:]
     return player, com1, com2, com3
 
-def sun_player_present(players, first, second, third, fourth):
-    if(players[0]=="player"):
+def sun_player_present(players, player, com1, com2, com3):
+    if (players[0] == "player"):
         show_your_card(player, com1, com2, com3, players)
-        card = input("리드 수트로 제시할 카드를 입력하시오.")
-        lead_suit = cardremove(card)
-    else:
-        lead_suit = first[0]
-        first = first[1:]
+        c = input("리드 수트로 제시할 카드를 입력하시오.")
+        lead_suit = card_remove(c, player)
+    elif (players[0] == "com1"):
+        lead_suit = com1[0]
+        com1 = com1[1:]
+    elif (players[0] == "com2"):
+        lead_suit = com2[0]
+        com2 = com2[1:]
+    elif (players[0] == "com3"):
+        lead_suit = com3[0]
+        com3 = com3[1:]
 
-    return lead_suit;
+    return lead_suit
+
+def big(a, b):
+    bool = False
+    if (int(a[0]) > int(b[0]) or int(a[0]) == int(b[0]) and int(a[1]) > int(b[1])):
+        bool = True
+    return bool
+def num_big(a, b):
+    bool = False
+    if (int(a[0]) == int(b[0]) and int(a[1]) > int(b[1])):
+        bool = True
+    return bool
 
 def no_card(who, lead_suit):  # 낼 카드가 0개인지 확인
-    def big(a, b):
-        bool = False
-        if (int(a[0]) > int(b[0]) or int(a[0]) == int(b[0]) and int(a[1]) > int(b[1])):
-            bool = True
-        return bool
-
-    def num_big(a, b):
-        bool = False
-        if (int(a[0]) == int(b[0]) and int(a[1]) > int(b[1])):
-            bool = True
-        return bool
-
     no = 0
     for i in range(len(who)):
         if int(lead_suit[0]) == 1 or int(lead_suit[0]) == 7 or int(lead_suit[0]) == 8:
@@ -159,6 +164,48 @@ def no_card(who, lead_suit):  # 낼 카드가 0개인지 확인
                 if big(who[i], lead_suit):
                     no = no + 1
     return no
+
+def higher_level(c, lead_suit):
+    bool = False
+    if int(lead_suit[0]) == 1 or int(lead_suit[0]) == 7 or int(lead_suit[0]) == 8:
+        if big(c, lead_suit):
+            bool = True
+    elif int(lead_suit[0]) == 2 or int(lead_suit[0]) == 3 or int(lead_suit[0]) == 4 or int(lead_suit[0]) == 5:
+        if int(c[0]) == 2 or int(c[0]) == 3 or int(c[0]) == 4 or int(c[0]) == 5:
+            if num_big(c, lead_suit):  # lead_suit가 B, Y, R, G 레벨일 경우, 카드 숫자가 더 커야 함
+                bool = True
+        else:
+            if big(c, lead_suit):
+                bool = True
+    elif int(lead_suit[0]) == 6:
+        if int(c[0]) != 8:  # lead_suit가 Mermaid 레벨일 경우, who가 Pirate이어도 카드를 못 냄
+            if big(c, lead_suit):
+                bool = True
+    return bool
+
+def player_draw_card(player, winners, lead_suit):
+    print()
+    print("내가 가지고 있는 카드는")
+    print()
+    display_card(cardlist(player))
+    print()
+    while True:
+        c = input("제시할 카드를 입력해 주세요.")
+        bool = False
+        for i in range(len(card)):
+            if (c[0] == player[i][0] and c[1] == player[i][1] and higher_level(c, lead_suit)):
+                bool = True
+                break
+        if (bool):
+            break
+    card_remove(c, player)
+    if (no_card(player, lead_suit) <= 0):
+        winners.append("players")
+        print()
+        print("player는 게임이 끝났습니다!")
+        print("player는 " + str(len(winners)) + "등 입니다.\n")
+        print()
+		return player
 
 def Skull_King():
     username, tries, wins, members = login(load_members())
@@ -215,7 +262,7 @@ def rule():
                   "카드 랭킹은 탈출<블루=옐로우=레드<그레이<인어<해적 순이며 ",
                   "스컬킹은 인어를 제외한 모든 카드보다 높은 랭킹을 가진다.\n",
                   "Ⅱ. 게임 준비",
-                  "게임은 총 7라운드로 진행되며, 카드를 섞은 후 현재 라운드 수만큼 나누어 같는다.\n",
+                  "게임은 총 5라운드로 진행되며, 카드를 섞은 후 현재 라운드 수만큼 나누어 같는다.\n",
                   "Ⅲ. 용어 설명"
                   "리드 수트: 선플레이어가 제시한 카드 ",
                   "트릭: 선플레이어의 카드 제시하면 나머지 플레이어들은 돌아가며 같은 색깔의 높은 숫자의 카드 혹은 높은 레벨의 카드를 내야 한다. ",
