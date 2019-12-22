@@ -1,17 +1,20 @@
 import random
+
+
 def choice(message):
     answer = input(message)
-    while answer not in {"y","n"}:
+    while answer not in {"y", "n"}:
         answer = input(message)
-    if answer=="y":
+    if answer == "y":
         return True
     else:
         return False
 
+
 def sunseo():  # 순서정하기 함수
-    rank = [0,0,0,0]
+    rank = [0, 0, 0, 0]
     jusawe = [1, 2, 3, 4]
-    name = ["com1","com2","com3","player"]
+    name = ["com1", "com2", "com3", "player"]
     ans = []
     random.shuffle(jusawe)
     for i in range(4):
@@ -23,18 +26,19 @@ def sunseo():  # 순서정하기 함수
 
     cnt = 0
     while cnt < 4:
-        ans.append(name[rank.index(4-cnt)])
-        rank[rank.index(4-cnt)] = 0
+        ans.append(name[rank.index(4 - cnt)])
+        rank[rank.index(4 - cnt)] = 0
         cnt = cnt + 1
 
     return ans
 
+
 def Deck():
-    #Escape < B=Y=R<G < Mermaid < Pirate<SkullKing
+    # Escape < B=Y=R<G < Mermaid < Pirate<SkullKing
     # 1       2 3 4 5    6        7       8
-    deck=[]
+    deck = []
     for k in range(5):
-        deck.append((1,k))
+        deck.append((1, k))
     for color in range(2, 6):
         for k in range(1, 14):
             deck.append((color, k))
@@ -44,33 +48,36 @@ def Deck():
         deck.append((7, k))
     random.shuffle(deck)
     return deck
-              
+
+
 def cardlist(deck):
     cardlist = []
     for i in range(len(deck)):
         if int(deck[i][0]) == 1:
-            cardlist.append('Escape_'+str(deck[i][1]))
+            cardlist.append('Escape_' + str(deck[i][1]))
         elif int(deck[i][0]) == 2:
-            cardlist.append('Blue_'+str(deck[i][1]))
+            cardlist.append('Blue_' + str(deck[i][1]))
         elif int(deck[i][0]) == 3:
-            cardlist.append('Yellow_'+str(deck[i][1]))
+            cardlist.append('Yellow_' + str(deck[i][1]))
         elif int(deck[i][0]) == 4:
-            cardlist.append('Red_'+str(deck[i][1]))
+            cardlist.append('Red_' + str(deck[i][1]))
         elif int(deck[i][0]) == 5:
-            cardlist.append('Grey_'+str(deck[i][1]))
+            cardlist.append('Grey_' + str(deck[i][1]))
         elif int(deck[i][0]) == 6:
-            cardlist.append('Mermaid_'+str(deck[i][1]))
+            cardlist.append('Mermaid_' + str(deck[i][1]))
         elif int(deck[i][0]) == 7:
-            cardlist.append('Pirate_'+str(deck[i][1]))
+            cardlist.append('Pirate_' + str(deck[i][1]))
         elif int(deck[i][0]) == 8:
-            cardlist.append('SkullKing_'+str(deck[i][1]))
+            cardlist.append('SkullKing_' + str(deck[i][1]))
     return cardlist
 
+
 def display_card(cardlist):
-    print("|  ",end="")
-    for i in range(len(cardlist)-1):
-        print(cardlist[i], " |  ",end="")
-    print(cardlist[len(cardlist)-1], " |")
+    print("|  ", end="")
+    for i in range(len(cardlist) - 1):
+        print(cardlist[i], " |  ", end="")
+    print(cardlist[len(cardlist) - 1], " |")
+
 
 def show_your_card(player, com1, com2, com3, players):
     show = 1
@@ -99,8 +106,9 @@ def show_your_card(player, com1, com2, com3, players):
         else:
             show += 1
 
+
 def spread_card(round):
-    deck=Deck()
+    deck = Deck()
     player = []
     com1 = []
     com2 = []
@@ -116,11 +124,12 @@ def spread_card(round):
         deck = deck[1:]
     return player, com1, com2, com3
 
+
 def sun_player_present(players, player, com1, com2, com3):
     if (players[0] == "player"):
         show_your_card(player, com1, com2, com3, players)
         c = input("리드 수트로 제시할 카드를 입력하시오.")
-        lead_suit = card_remove(c, player)
+        lead_suit = cardremove(c, player)
     elif (players[0] == "com1"):
         lead_suit = com1[0]
         com1 = com1[1:]
@@ -133,16 +142,20 @@ def sun_player_present(players, player, com1, com2, com3):
 
     return lead_suit
 
+
 def big(a, b):
     bool = False
     if (int(a[0]) > int(b[0]) or int(a[0]) == int(b[0]) and int(a[1]) > int(b[1])):
         bool = True
     return bool
+
+
 def num_big(a, b):
     bool = False
     if (int(a[0]) == int(b[0]) and int(a[1]) > int(b[1])):
         bool = True
     return bool
+
 
 def no_card(who, lead_suit):  # 낼 카드가 0개인지 확인
     no = 0
@@ -152,18 +165,19 @@ def no_card(who, lead_suit):  # 낼 카드가 0개인지 확인
                 no = no + 1
         elif int(lead_suit[0]) == 2 or int(lead_suit[0]) == 3 or int(lead_suit[0]) == 4 or int(lead_suit[0]) == 5:
             if int(who[i][0]) == 2 or int(who[i][0]) == 3 or int(who[i][0]) == 4 or int(who[i][0]) == 5:
-                if num_big(who[i], lead_suit): # lead_suit가 B, Y, R, G 레벨일 경우, 카드 숫자가 더 커야 함
+                if num_big(who[i], lead_suit):  # lead_suit가 B, Y, R, G 레벨일 경우, 카드 숫자가 더 커야 함
                     no = no + 1
             else:
                 if big(who[i], lead_suit):
                     no = no + 1
         elif int(lead_suit[0]) == 6:
-            if int(who[i][0]) == 8: # lead_suit가 Mermaid 레벨일 경우, who가 Pirate이어도 카드를 못 냄
+            if int(who[i][0]) == 8:  # lead_suit가 Mermaid 레벨일 경우, who가 Pirate이어도 카드를 못 냄
                 continue
             else:
                 if big(who[i], lead_suit):
                     no = no + 1
     return no
+
 
 def higher_level(c, lead_suit):
     bool = False
@@ -182,6 +196,7 @@ def higher_level(c, lead_suit):
             if big(c, lead_suit):
                 bool = True
     return bool
+
 
 def player_draw_card(player, winners, lead_suit):
     print()
@@ -205,51 +220,63 @@ def player_draw_card(player, winners, lead_suit):
         print("player는 게임이 끝났습니다!")
         print("player는 " + str(len(winners)) + "등 입니다.\n")
         print()
-		return player
+        return player
+
 
 def Skull_King():
     username, tries, wins, members = login(load_members())
-    rule() #설명 할지 말지 선택 & 설명
+    rule()  # 설명 할지 말지 선택 & 설명
     while True:
         round = 0
         trick_point = 0
-        while(round <= 5):
+        while (round <= 5):
             round = round + 1
             print("===================================")
-            predict = BetorNot() #배팅할지 말지 선택 & 설명
-            players_order = sunseo()#주사위 던져서 순서 결정
-            #선 플레이어 카드내기
+            predict = BetorNot()  # 배팅할지 말지 선택 & 설명
+            players_order = sunseo()  # 주사위 던져서 순서 결정
+            # 선 플레이어 카드내기
             spread_card(round)
-            for i in range(4): #차례로 순서 돌아가기
-                높은 레벨, 높은 계급만 내기
-            if nocard(player,lead_suit)==no:낼 카드가 없으면 탈락
-                pass    
-            이긴 사람에게 +30점
-            trick_point += trick(predict, real)
-        
-        save_winnings(a)
+            for i in range(4):  # 차례로 순서 돌아가기
+                높은
+                레벨, 높은
+                계급만
+                내기
+            if nocard(player, lead_suit) == no: 낼
+            카드가
+            없으면
+            탈락
+            pass
+        이긴
+        사람에게 + 30
+        점
+        trick_point += trick(predict, real)
 
-def save_winnings(a):#a= boolean 
-    tries+=1    
-    members[username] = members[username][0],tries,wins
+    save_winnings(a)
+
+
+def save_winnings(a):  # a= boolean
+    tries += 1
+    members[username] = members[username][0], tries, wins
     store_members(members)
     again = input("게임을 계속 하시겠습니까?(y/n)")
-    if again == y :
+    if again == y:
         if a:
-           ++wins
+            ++wins
         Skull_King()
     else:
         print("게임을 종료합니다.")
         exit(0)
 
+
 def store_members(members):
-    file = open("members.txt","w")
+    file = open("members.txt", "w")
     name = members.keys()
     for name in names:
         password, tries, wins = members[name]
-        line = name +','+password+','+str(tries)+'+'+str(wins)+'\n'
+        line = name + ',' + password + ',' + str(tries) + '+' + str(wins) + '\n'
         file.write(line)
     file.close()
+
 
 def rule():
     a = choice("Skull_King의 규칙을 아시나요?(y/n) ")
@@ -296,22 +323,25 @@ def rule():
     else:
         print("그럼 게임을 시작합니다.")
 
+
 def trick(predict, real):
     score = 0
     if predict == real:
         score += real * 20
     else:
-        score -= abs(predict - real)*10
+        score -= abs(predict - real) * 10
     return score
 
+
 def load_members():
-    file = open("members.txt","r")
+    file = open("members.txt", "r")
     members = {}
     for line in file:
         name, passwd, tries, wins = line.strip('\n').split(',')
-        members[name] = (passwd,int(tries),float(wins))
+        members[name] = (passwd, int(tries), float(wins))
     file.close()
     return members
+
 
 def login(members):
     username = input("사용자명을 입력하십시오: (4 글자 이내) ")
@@ -320,13 +350,14 @@ def login(members):
     trypasswd = input("비밀번호를 입력하십시오: ")
     if username in members.keys():
         if trypasswd == members[username][0]:
-            print("플레이 횟수: ", members[username][1],"\n" "승리 횟수: ", members[username][2])# username의 게임시도 횟수와 이긴 횟수를 members에서 가져와 보여준다.
-            
+            print("플레이 횟수: ", members[username][1], "\n" "승리 횟수: ",
+                  members[username][2])  # username의 게임시도 횟수와 이긴 횟수를 members에서 가져와 보여준다.
+
             if members[username][1] == 0:
                 print("당신의 승률은 0 % 입니다.")
             else:
-                print("당신의 승률은 ", "{0:.1f}".format(members[username][2]/members[username][1]*100), "% 입니다.")
-            tries, wins = members[username][1],members[username][2]
+                print("당신의 승률은 ", "{0:.1f}".format(members[username][2] / members[username][1] * 100), "% 입니다.")
+            tries, wins = members[username][1], members[username][2]
             return username, tries, wins, members
         else:
             return login(members)
@@ -334,9 +365,10 @@ def login(members):
         members[username] = (trypasswd, 0, 0)
         return username, 0, 0, members
 
+
 def BetorNot():
     bet = int(input("얼마에 배팅하시겠습니까? "))
-    while bet>10 or bet<0 :
+    while bet > 10 or bet < 0:
         print("잘못된 숫자입니다. 다시 입력하십시오.")
         bet = int(input("얼마에 배팅하시겠습니까? "))
     return bet
@@ -347,23 +379,23 @@ def computer_bet(computer,betcardlist,beforecard):
     color_partition = beforecard.split('_')
     newbeforecard = []
     canbetcard = []
-    if color_partition[0] == 'Escape':
+    if color_partition[0] == "Escape":
         newbeforecard.append((1,int(color_partition[1])))
-    elif color_partition[0] == 'Blue':
+    elif color_partition[0] == "Blue":
         newbeforecard.append((2,int(color_partition[1])))
-    elif color_partition[0] == 'Yellow':
+    elif color_partition[0] == "Yellow":
         newbeforecard.append((3,int(color_partition[1])))
-    elif color_partition[0] == 'Blue':
+    elif color_partition[0] == "Blue":
         newbeforecard.append((4,int(color_partition[1])))
-    elif color_partition == 'Red':
+    elif color_partition == "Red":
         newbeforecard.append((5,int(color_partition[1])))
-    elif color_partition == 'Grey':
+    elif color_partition == "Grey":
         newbeforecard.append((6,int(color_partition[1])))
-    elif color_partition == 'Mermaid':
+    elif color_partition == "Mermaid":
         newbeforecard.append((7,int(color_partition[1])))
-    elif color_partition == 'Pirate':
+    elif color_partition == "Pirate":
         newbeforecard.append((8,int(color_partition[1])))
-    elif color_partition == 'SkullKing':
+    elif color_partition == "SkullKing":
         newbeforecard.append((9,int(color_partition[1])))
     for i in betcardlist:
         if (newbeforecard[0] != 7):
@@ -389,23 +421,45 @@ def computer_bet(computer,betcardlist,beforecard):
 def cardremove(cardname, player):
     partitioncard = []
     partitioncard = cardname.split('_')
-    if partitioncard[0] == 'Escape':
+    if partitioncard[0] == "Escape":
         player.remove((1, int(partitioncard[1])))
-    elif partitioncard[0] == 'Blue':
+    elif partitioncard[0] == "Blue":
         player.remove((2, int(partitioncard[1])))
-    elif partitioncard[0] == 'Yellow':
+    elif partitioncard[0] == "Yellow":
         player.remove((3, int(partitioncard[1])))
-    elif partitioncard[0] == 'Blue':
+    elif partitioncard[0] == "Red":
         player.remove((4, int(partitioncard[1])))
-    elif partitioncard[0] == 'Red':
+    elif partitioncard[0] == "Grey":
         player.remove((5, int(partitioncard[1])))
-    elif partitioncard[0] == 'Grey':
+    elif partitioncard[0] == "Mermaid":
         player.remove((6, int(partitioncard[1])))
-    elif partitioncard[0] == 'Mermaid':
+    elif partitioncard[0] == "Pirate":
         player.remove((7, int(partitioncard[1])))
-    elif partitioncard[0] == 'Pirate':
+    elif partitioncard[0] == "SkullKing":
         player.remove((8, int(partitioncard[1])))
-    elif partitioncard[0] == 'SkullKing':
-        player.remove((9, int(partitioncard[1])))
 
-    return player
+    return cardname
+
+def change(cardname):
+    partitioncard = []
+    partitioncard = cardname.split('_')
+    if partitioncard[0] == "Escape":
+        card = (1, int(partitioncard[1]))
+    elif partitioncard[0] == "Blue":
+        card = (2, int(partitioncard[1]))
+    elif partitioncard[0] == "Yellow":
+        card = (3, int(partitioncard[1]))
+    elif partitioncard[0] == "Red":
+        card = (4, int(partitioncard[1]))
+    elif partitioncard[0] == "Grey":
+        card = (5, int(partitioncard[1]))
+    elif partitioncard[0] == "Mermaid":
+        card = (6, int(partitioncard[1]))
+    elif partitioncard[0] == "Pirate":
+        card = (7, int(partitioncard[1]))
+    elif partitioncard[0] == "SkullKing":
+        card = (8, int(partitioncard[1]))
+
+    return card
+
+
