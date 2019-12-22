@@ -24,9 +24,9 @@
 2019040973 소프트웨어학부 유은정 warmth424\
   load_members, sunseo, Skull_King, trick, spread_card\
 2019082451 소프트웨어학부 손승아 Gongsoonyee\
-  README 파일 정리, 로그인 함수, playmore, save_winnings, deck, betornot\
+  README 작성, 로그인 함수, playmore, save_winnings, deck, betornot\
 2019038277 소프트웨어학부 김문주 dorothy184\
-  rule, no_card, display_card, lead-suit, cardlist, higher_level, show_your_card, sun_player_present,choice 함수
+  rule, no_card, display_card, lead-suit, cardlist, higher_level, show_your_card, sun_player_present,choice 함수\
 2019007329 소프트웨어학부 이지현 JiHyeonL\
  cardremove함수 작성, computer_bet 함수 작성
   
