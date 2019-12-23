@@ -211,7 +211,7 @@ def higher_level(c, lead_suit):
     return bool
 
 
-def player_draw_card(player, lead_suit,players):
+def player_draw_card(player, lead_suit,players,compare, r_winner):
     if (no_card(player, cardchange1(lead_suit)) <= 0):
         print("player는 낼 카드가 없습니다 ")
         print("player는 게임에서 탈락합니다. Bye~")
@@ -229,7 +229,7 @@ def player_draw_card(player, lead_suit,players):
         c_num = cardchange1(c)
         bool = False
         i=-1
-        while(i<=len(player)-2):
+        while(i<len(player)-1):
             i+=1
             if (c_num[0] == player[i][0] and c_num[1] == player[i][1] and higher_level(c_num, cardchange1(lead_suit))):
                 bool = True
@@ -239,7 +239,10 @@ def player_draw_card(player, lead_suit,players):
         else:
             continue
     cardremove(c, player)
-    if (no_card(player, lead_suit) <= 0):
+    if (higher_level(c_num, cardchange1(compare))):
+        compare = c
+        r_winner = "player"
+    if (no_card(player, cardchange1(lead_suit)) <= 0):
         print("player는 낼 카드가 없습니다 ")
         print("player는 게임에서 탈락합니다. Bye~")
         print()
@@ -368,7 +371,7 @@ def BetorNot():
         bet = int(input("얼마에 배팅하시겠습니까? "))
     return bet
 
-def computer_bet(computer,betcardlist,beforecard,players):
+def computer_bet(computer,betcardlist,beforecard,players,compare,r_winner):
     #computer는 현재 제시할 컴퓨터 이름ex) computer2, betcardlist는 그 컴퓨터의 카드가 있는 리스트 ex)com2
     #beforecard는 전 플레이어나 컴퓨터가 낸 카드
     color_partition = beforecard.split('_')
@@ -401,7 +404,10 @@ def computer_bet(computer,betcardlist,beforecard,players):
         players.remove(computer)
         return 0
     computercard = canbetcard[0]
-    print(computer,"가",computercard ,"카드를 제시하였습니다.");
+    if(higher_level(computercard,cardchange1(compare))):
+        compare=cardchange2(computercard)
+        r_winner=computer
+    print(computer,"가",cardchange2(computercard) ,"카드를 제시하였습니다.");
     betcardlist.remove(computercard)
     return 0
 
@@ -472,6 +478,10 @@ def cardchange2(card):
 def Skull_King():
     rule()  # 설명 할지 말지 선택 & 설명
     round=1
+    p_s=0
+    c1_s=0
+    c2_s=0
+    c3_s=0
     while (round <= 5):
         print()
         print(round, "round를 시작합니다")
@@ -480,24 +490,50 @@ def Skull_King():
         card = cardlist(Deck())
         player, com1, com2, com3 = spread_card(round)
         leadsuit = sun_player_present(players, player, com1, com2, com3)
+        compare=leadsuit
+        r_winner=players[0]
         while(len(players)>0):
             if (players[0] == "com1"):
-                computer_bet("com2", com1, leadsuit, players)
-                player_draw_card(player, leadsuit, players)
-                computer_bet("com3", com1, leadsuit, players)
+                computer_bet("com2", com1, leadsuit, players, compare, r_winner)
+                player_draw_card(player, leadsuit, players,compare, r_winner)
+                computer_bet("com3", com1, leadsuit, players,compare, r_winner)
             elif (players[0] == "player"):
-                computer_bet("com2", com1, leadsuit, players)
-                computer_bet("com1", com1, leadsuit, players)
-                computer_bet("com3", com1, leadsuit, players)
+                computer_bet("com2", com1, leadsuit, players,compare, r_winner)
+                computer_bet("com1", com1, leadsuit, players,compare, r_winner)
+                computer_bet("com3", com1, leadsuit, players,compare, r_winner)
             elif (players[0] == "com2"):
-                computer_bet("com1", com1, leadsuit, players)
-                computer_bet("com3", com1, leadsuit, players)
-                player_draw_card(player, leadsuit, players)
+                computer_bet("com1", com1, leadsuit, players,compare, r_winner)
+                computer_bet("com3", com1, leadsuit, players,compare, r_winner)
+                player_draw_card(player, leadsuit, players,compare, r_winner)
             elif (players[0] == "com3"):
-                computer_bet("com1", com1, leadsuit, players)
-                computer_bet("com2", com1, leadsuit, players)
-                player_draw_card(player, leadsuit, players)
+                computer_bet("com1", com1, leadsuit, players,compare, r_winner)
+                computer_bet("com2", com1, leadsuit, players,compare, r_winner)
+                player_draw_card(player, leadsuit, players,compare, r_winner)
+            print("라운드의 위너는 ", r_winner, "입니다")
+            if(r_winner=="player"):
+                p_s+=1
+            elif (r_winner == "com1"):
+                c1_s += 1
+            elif (r_winner == "com2"):
+                c2_s += 1
+            elif (r_winner == "com3"):
+                c3_s += 1
+            print("점수 집계")
+            print("player:",p_s," ,com1:", c1_s,", com2:", c2_s, ", com3:", c3_s)
             break;
         round+=1
-
+    final = [p_s, c1_s, c2_s, c3_s]
+    f_player = ["player", "com1", "com2", "com3"]
+    max = [final[0]]
+    max_p = ["player"]
+    for i in range(1, 4):
+        if (max[0] < final[i]):
+            max.remove(max[0])
+            max_p.remove(max_p[0])
+            max.append(final[i])
+            max_p.append(f_player[i])
+    print("이 게임의 최종 승자는")
+    for i in range(len(max_p)):
+        print(max_p[i])
+    print("입니다")
 Skull_King()
