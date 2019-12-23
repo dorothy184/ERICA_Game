@@ -46,6 +46,8 @@ def Deck():
         deck.append((6, k))
     for k in range(5):
         deck.append((7, k))
+    for k in range(1):
+        deck.append((8, k))
     random.shuffle(deck)
     return deck
 
@@ -54,30 +56,32 @@ def cardlist(deck):
     cardlist = []
     for i in range(len(deck)):
         if int(deck[i][0]) == 1:
-            cardlist.append('Escape_' + str(deck[i][1]))
+            cardlist.append("Escape_" + str(deck[i][1]))
         elif int(deck[i][0]) == 2:
-            cardlist.append('Blue_' + str(deck[i][1]))
+            cardlist.append("Blue_" + str(deck[i][1]))
         elif int(deck[i][0]) == 3:
-            cardlist.append('Yellow_' + str(deck[i][1]))
+            cardlist.append("Yellow_" + str(deck[i][1]))
         elif int(deck[i][0]) == 4:
-            cardlist.append('Red_' + str(deck[i][1]))
+            cardlist.append("Red_" + str(deck[i][1]))
         elif int(deck[i][0]) == 5:
-            cardlist.append('Grey_' + str(deck[i][1]))
+            cardlist.append("Grey_" + str(deck[i][1]))
         elif int(deck[i][0]) == 6:
-            cardlist.append('Mermaid_' + str(deck[i][1]))
+            cardlist.append("Mermaid_" + str(deck[i][1]))
         elif int(deck[i][0]) == 7:
-            cardlist.append('Pirate_' + str(deck[i][1]))
+            cardlist.append("Pirate_" + str(deck[i][1]))
         elif int(deck[i][0]) == 8:
-            cardlist.append('SkullKing_' + str(deck[i][1]))
+            cardlist.append("SkullKing_" + str(deck[i][1]))
     return cardlist
 
 
 def display_card(cardlist):
     print("|  ", end="")
-    for i in range(len(cardlist) - 1):
-        print(cardlist[i], " |  ", end="")
-    print(cardlist[len(cardlist) - 1], " |")
-
+    if(len(cardlist)==1):
+        print(cardlist[len(cardlist) - 1], " |")
+    else:
+        for i in range(len(cardlist) - 1):
+            print(cardlist[i], " |  ", end="")
+        print(cardlist[len(cardlist) - 1], " |")
 
 def show_your_card(player, com1, com2, com3, players):
     show = 1
@@ -131,14 +135,23 @@ def sun_player_present(players, player, com1, com2, com3):
         c = input("리드 수트로 제시할 카드를 입력하시오.")
         lead_suit = cardremove(c, player)
     elif (players[0] == "com1"):
-        lead_suit = com1[0]
+        lead_suit = cardchange2(com1[0])
         com1 = com1[1:]
+        print("com1이 리드 수트를 제시합니다")
+        print("리드 수트는", lead_suit, "입니다")
+        print()
     elif (players[0] == "com2"):
-        lead_suit = com2[0]
+        lead_suit = cardchange2(com2[0])
         com2 = com2[1:]
+        print("com2가 리드 수트를 제시합니다")
+        print("리드 수트는", lead_suit, "입니다")
+        print()
     elif (players[0] == "com3"):
-        lead_suit = com3[0]
+        lead_suit = cardchange2(com3[0])
         com3 = com3[1:]
+        print("com3가 리드 수트를 제시합니다")
+        print("리드 수트는", lead_suit, "입니다")
+        print()
 
     return lead_suit
 
@@ -198,7 +211,14 @@ def higher_level(c, lead_suit):
     return bool
 
 
-def player_draw_card(player, winners, lead_suit):
+def player_draw_card(player, lead_suit,players):
+    if (no_card(player, cardchange1(lead_suit)) <= 0):
+        print("player는 낼 카드가 없습니다 ")
+        print("player는 게임에서 탈락합니다. Bye~")
+        print()
+        players.remove("player")
+        print()
+        return player
     print()
     print("내가 가지고 있는 카드는")
     print()
@@ -206,52 +226,27 @@ def player_draw_card(player, winners, lead_suit):
     print()
     while True:
         c = input("제시할 카드를 입력해 주세요.")
+        c_num = cardchange1(c)
         bool = False
-        for i in range(len(card)):
-            if (c[0] == player[i][0] and c[1] == player[i][1] and higher_level(c, lead_suit)):
+        i=-1
+        while(i<=len(player)-2):
+            i+=1
+            if (c_num[0] == player[i][0] and c_num[1] == player[i][1] and higher_level(c_num, cardchange1(lead_suit))):
                 bool = True
                 break
-        if (bool):
+        if(bool):
             break
+        else:
+            continue
     cardremove(c, player)
     if (no_card(player, lead_suit) <= 0):
-        winners.append("players")
+        print("player는 낼 카드가 없습니다 ")
+        print("player는 게임에서 탈락합니다. Bye~")
         print()
-        print("player는 게임이 끝났습니다!")
-        print("player는 " + str(len(winners)) + "등 입니다.\n")
+        players.remove("player")
         print()
         return player
 
-
-def Skull_King():
-    username, tries, wins, members = login(load_members())
-    rule()  # 설명 할지 말지 선택 & 설명
-    while True:
-        round = 0
-        trick_point = 0
-        while (round <= 5):
-            round = round + 1
-            print("===================================")
-            predict = BetorNot()  # 배팅할지 말지 선택 & 설명
-            players_order = sunseo()  # 주사위 던져서 순서 결정
-            # 선 플레이어 카드내기
-            spread_card(round)
-            for i in range(4):  # 차례로 순서 돌아가기
-                높은
-                레벨, 높은
-                계급만
-                내기
-            if nocard(player, lead_suit) == no: 낼
-            카드가
-            없으면
-            탈락
-            pass
-        이긴
-        사람에게 + 30
-        점
-        trick_point += trick(predict, real)
-
-    save_winnings(a)
 
 
 def save_winnings(a):  # a= boolean
@@ -261,11 +256,7 @@ def save_winnings(a):  # a= boolean
     again = input("게임을 계속 하시겠습니까?(y/n)")
     if again == y:
         if a:
-<<<<<<< HEAD
             ++wins
-=======
-            wins=wins+1
->>>>>>> 46e5099ec9b0647f73730dc24cc4bcfec018cf8b
         Skull_King()
     else:
         print("게임을 종료합니다.")
@@ -377,7 +368,7 @@ def BetorNot():
         bet = int(input("얼마에 배팅하시겠습니까? "))
     return bet
 
-def computer_bet(computer,betcardlist,beforecard):
+def computer_bet(computer,betcardlist,beforecard,players):
     #computer는 현재 제시할 컴퓨터 이름ex) computer2, betcardlist는 그 컴퓨터의 카드가 있는 리스트 ex)com2
     #beforecard는 전 플레이어나 컴퓨터가 낸 카드
     color_partition = beforecard.split('_')
@@ -389,37 +380,30 @@ def computer_bet(computer,betcardlist,beforecard):
         newbeforecard.append((2,int(color_partition[1])))
     elif color_partition[0] == "Yellow":
         newbeforecard.append((3,int(color_partition[1])))
-    elif color_partition[0] == "Blue":
+    elif color_partition[0] == "Red":
         newbeforecard.append((4,int(color_partition[1])))
-    elif color_partition == "Red":
+    elif color_partition[0] == "Grey":
         newbeforecard.append((5,int(color_partition[1])))
-    elif color_partition == "Grey":
+    elif color_partition[0] == "Mermaid":
         newbeforecard.append((6,int(color_partition[1])))
-    elif color_partition == "Mermaid":
+    elif color_partition[0] == "Pirate":
         newbeforecard.append((7,int(color_partition[1])))
-    elif color_partition == "Pirate":
+    elif color_partition[0] == "SkullKing":
         newbeforecard.append((8,int(color_partition[1])))
-    elif color_partition == "SkullKing":
-        newbeforecard.append((9,int(color_partition[1])))
-    for i in betcardlist:
-        if (newbeforecard[0] != 7):
-            if (i[0] == newbeforecard[0]):
-                if (i[1] > newbeforecard[1]):
-                    canbetcard.append(i)
-            elif (i[0] > newbeforecard[0]):
-                canbetcard.append(i)
-        else:
-            if (i[0] == 9):
-                continue
-            elif (i[0] == newbeforecard[0]):
-                if (i[1] > newbeforecard[1]):
-                    canbetcard.append(i)
-            elif (i[0] > newbeforecard[0]):
-                canbetcard.append(i)
+    for i in range(len(betcardlist)):
+        if (higher_level(betcardlist[i], newbeforecard[0])):
+            canbetcard.append(betcardlist[i])
     random.shuffle(canbetcard)
+    if(len(canbetcard)==0):
+        print(computer + "낼 카드가 없습니다")
+        print(computer+"는 게임에서 탈락합니다. Bye~")
+        print()
+        players.remove(computer)
+        return 0
     computercard = canbetcard[0]
     print(computer,"가",computercard ,"카드를 제시하였습니다.");
-    betcardlist.remove(computer)
+    betcardlist.remove(computercard)
+    return 0
 
 
 def cardremove(cardname, player):
@@ -444,31 +428,7 @@ def cardremove(cardname, player):
 
     return cardname
 
-
-def change(cardname):
-    partitioncard = []
-    partitioncard = cardname.split('_')
-    if partitioncard[0] == "Escape":
-        card = (1, int(partitioncard[1]))
-    elif partitioncard[0] == "Blue":
-        card = (2, int(partitioncard[1]))
-    elif partitioncard[0] == "Yellow":
-        card = (3, int(partitioncard[1]))
-    elif partitioncard[0] == "Red":
-        card = (4, int(partitioncard[1]))
-    elif partitioncard[0] == "Grey":
-        card = (5, int(partitioncard[1]))
-    elif partitioncard[0] == "Mermaid":
-        card = (6, int(partitioncard[1]))
-    elif partitioncard[0] == "Pirate":
-        card = (7, int(partitioncard[1]))
-    elif partitioncard[0] == "SkullKing":
-        card = (8, int(partitioncard[1]))
-
-    return card
-
-
-def cardchange(card_munza):
+def cardchange1(card_munza):
     partitioncard = []
     partitioncard = card_munza.split('_')
     if partitioncard[0] == "Escape":
@@ -489,3 +449,55 @@ def cardchange(card_munza):
         tuplecard = ((8, int(partitioncard[1])))
 
     return tuplecard
+
+def cardchange2(card):
+    if int(card[0]) == 1:
+        munza=("Escape_" + str(card[1]))
+    elif int(card[0]) == 2:
+        munza=("Blue_" + str(card[1]))
+    elif int(card[0]) == 3:
+        munza=("Yellow_" + str(card[1]))
+    elif int(card[0]) == 4:
+        munza=("Red_" + str(card[1]))
+    elif int(card[0]) == 5:
+        munza=("Grey_" + str(card[1]))
+    elif int(card[0]) == 6:
+        munza=("Mermaid_" + str(card[1]))
+    elif int(card[0]) == 7:
+        munza=("Pirate_" + str(card[1]))
+    elif int(card[0]) == 8:
+        munza=("SkullKing_" + str(card[1]))
+    return munza
+
+def Skull_King():
+    rule()  # 설명 할지 말지 선택 & 설명
+    round=1
+    while (round <= 5):
+        print()
+        print(round, "round를 시작합니다")
+        print()
+        players=sunseo()
+        card = cardlist(Deck())
+        player, com1, com2, com3 = spread_card(round)
+        leadsuit = sun_player_present(players, player, com1, com2, com3)
+        while(len(players)>0):
+            if (players[0] == "com1"):
+                computer_bet("com2", com1, leadsuit, players)
+                player_draw_card(player, leadsuit, players)
+                computer_bet("com3", com1, leadsuit, players)
+            elif (players[0] == "player"):
+                computer_bet("com2", com1, leadsuit, players)
+                computer_bet("com1", com1, leadsuit, players)
+                computer_bet("com3", com1, leadsuit, players)
+            elif (players[0] == "com2"):
+                computer_bet("com1", com1, leadsuit, players)
+                computer_bet("com3", com1, leadsuit, players)
+                player_draw_card(player, leadsuit, players)
+            elif (players[0] == "com3"):
+                computer_bet("com1", com1, leadsuit, players)
+                computer_bet("com2", com1, leadsuit, players)
+                player_draw_card(player, leadsuit, players)
+            break;
+        round+=1
+
+Skull_King()
