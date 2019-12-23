@@ -1,10 +1,12 @@
+#-*-coding: utf-8-*-
+from __future__ import print_function  # <-- this should be the first
 import random
 
 
 def choice(message):
-    answer = input(message)
+    answer = raw_input(message)
     while answer not in {"y", "n"}:
-        answer = input(message)
+        answer = raw_input(message)
     if answer == "y":
         return True
     else:
@@ -75,12 +77,12 @@ def cardlist(deck):
 
 
 def display_card(cardlist):
-    print("|  ", end="")
+    print("|  ",end="")
     if(len(cardlist)==1):
         print(cardlist[len(cardlist) - 1], " |")
     else:
         for i in range(len(cardlist) - 1):
-            print(cardlist[i], " |  ", end="")
+            print(cardlist[i], " |  ",end="")
         print(cardlist[len(cardlist) - 1], " |")
 
 def show_your_card(player, com1, com2, com3, players):
@@ -132,7 +134,7 @@ def spread_card(round):
 def sun_player_present(players, player, com1, com2, com3):
     if (players[0] == "player"):
         show_your_card(player, com1, com2, com3, players)
-        c = input("리드 수트로 제시할 카드를 입력하시오.")
+        c = raw_input("리드 수트로 제시할 카드를 입력하시오.")
         lead_suit = cardremove(c, player)
     elif (players[0] == "com1"):
         lead_suit = cardchange2(com1[0])
@@ -225,7 +227,7 @@ def player_draw_card(player, lead_suit,players,compare, r_winner):
     display_card(cardlist(player))
     print()
     while True:
-        c = input("제시할 카드를 입력해 주세요.")
+        c = raw_input("제시할 카드를 입력해 주세요.")
         c_num = cardchange1(c)
         bool = False
         i=-1
